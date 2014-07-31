@@ -17,7 +17,11 @@
     "rockwell",
     "siemens"
   ],
-  "author": "eFlex Systems",
+  "author": {
+    "name": "eFlex Systems",
+    "email": "jacobjewell@eflexsystems.com",
+    "url": "http://www.eflexsystems.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/eflexsystems/bcd-date/issues"
