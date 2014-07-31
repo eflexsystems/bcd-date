@@ -1,6 +1,6 @@
 {
   "name": "bcd-date",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Decodes a BCD datetime buffer into a normal javascript date object",
   "main": "index.js",
   "scripts": {
@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/eflexsystems/bcd-date/issues"
   },
-  "homepage": "https://github.com/eflexsystems/bcd-date"
+  "homepage": "https://github.com/eflexsystems/bcd-date",
+  "dependencies": {
+    "bcd": "^1.0.0",
+    "moment": "^2.8.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.3"
+  }
 }
