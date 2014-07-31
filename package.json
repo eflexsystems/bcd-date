@@ -1,6 +1,6 @@
 {
   "name": "bcd-date",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decodes a BCD datetime buffer into a normal javascript date object",
   "main": "index.js",
   "scripts": {
