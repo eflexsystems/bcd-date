@@ -1,0 +1,26 @@
+{
+  "name": "bcd-date",
+  "version": "0.0.1",
+  "description": "Decodes a BCD datetime buffer into a normal javascript date object",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eflexsystems/bcd-date"
+  },
+  "keywords": [
+    "bcd",
+    "date",
+    "plc",
+    "rockwell",
+    "siemens"
+  ],
+  "author": "eFlex Systems",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eflexsystems/bcd-date/issues"
+  },
+  "homepage": "https://github.com/eflexsystems/bcd-date"
+}
