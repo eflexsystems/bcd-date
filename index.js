@@ -11,53 +11,47 @@ function _decodeMillisecond(bytes) {
     return parseInt(lastDigitRemoved);
 }
 
-function _encodeMilliseconds(wrappedDate) {
-  var millisecond = wrappedDate.format('SSS');
+function _encodeMilliseconds(date) {
+  var millisecond = date.format('SSS');
 
   var msd = millisecond.slice(0, 2);
-  var lsd = millisecond.slice(2, 3) + wrappedDate.weekday();
+  var lsd = millisecond.slice(2, 3) + date.weekday();
 
-  return Buffer.concat([bcd.encode(msd), bcd.encode(parseInt(lsd))]);
+  return Buffer.concat([bcd.encode(msd), bcd.encode(lsd)]);
 }
 
 function decode(bytes) {
-  var date = {
-      year:        2000 + bcd.decode(bytes.slice(0, 1)),
-      month:       bcd.decode(bytes.slice(1, 2)) - 1,
-      day:         bcd.decode(bytes.slice(2, 3)),
-      hour:        bcd.decode(bytes.slice(3, 4)),
-      minute:      bcd.decode(bytes.slice(4, 5)),
-      second:      bcd.decode(bytes.slice(5, 6)),
-      millisecond: _decodeMillisecond(bytes.slice(6, 8))
-  };
+  var date = [
+    2000 + bcd.decode(bytes.slice(0, 1)),
+    bcd.decode(bytes.slice(1, 2)) - 1,
+    bcd.decode(bytes.slice(2, 3)),
+    bcd.decode(bytes.slice(3, 4)),
+    bcd.decode(bytes.slice(4, 5)),
+    bcd.decode(bytes.slice(5, 6)),
+    _decodeMillisecond(bytes.slice(6, 8))
+  ];
 
   return moment(date).toDate();
 }
 
-function encode(date) {
-  var wrappedDate = moment(date);
+function encode(encodedDate) {
+  var date = moment(encodedDate);
 
-  var splitDate = {
-    year: wrappedDate.year() - 2000,
-    month: wrappedDate.month() + 1,
-    day:  wrappedDate.date(),
-    hour: wrappedDate.hour(),
-    minute: wrappedDate.minute(),
-    second: wrappedDate.second(),
-  };
+  var splitDate = [
+    bcd.encode(date.year() - 2000),
+    bcd.encode(date.month() + 1),
+    bcd.encode(date.date()),
+    bcd.encode(date.hour()),
+    bcd.encode(date.minute()),
+    bcd.encode(date.second()),
+    _encodeMilliseconds(date)
+  ];
 
-  var buffer = new Buffer(0);
-  for (var prop in splitDate) {
-    var bytes = bcd.encode(splitDate[prop]);
-    buffer = Buffer.concat([buffer, bytes]);
-  }
-
-  var millisecond = _encodeMilliseconds(wrappedDate);
-
-  buffer = Buffer.concat([buffer, millisecond]);
-
-  return buffer;
+  return splitDate.reduce(function(buffer, bytes) {
+    return Buffer.concat([buffer, bytes]);
+  }, new Buffer(0));
 }
 
 module.exports.decode = decode;
 module.exports.encode = encode;
+
