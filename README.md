@@ -24,7 +24,10 @@ example
 	var bcdDate = require('bcd-date');
 
 	var buffer = new Buffer('1012231130301235', 'hex');
-	var result = bcdDate(buffer);
+	
+	var date   = bcdDate.decode(buffer);
+	var buffer = bcdDate.encode(date);
 
-	// result == date at 2010-12-23 11:30:30.123
+	// date   == date at 2010-12-23 11:30:30.123
+	// buffer == buffer of 1012231130301235
 
