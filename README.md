@@ -1,6 +1,8 @@
 bcd-date
 ========
 
+[![Build Status](https://travis-ci.org/eflexsystems/bcd-date.svg?branch=master)](https://travis-ci.org/eflexsystems/bcd-date)
+
 Node.js package to decode BCD datetime buffers used by Siemens and Rockwell PLCs into a normal javascript date objects.
 
 The format of the BCD date is as follows
