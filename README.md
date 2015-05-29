@@ -33,3 +33,8 @@ example
 	// date   == date at 2010-12-23 11:30:30.123
 	// buffer == buffer of 1012231130301235
 
+    // decode as UTC
+	var date = bcdDate.decode(buffer, true);
+
+    // encode as UTC
+	var date = bcdDate.encode(buffer, true);

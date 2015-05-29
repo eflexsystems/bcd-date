@@ -20,7 +20,7 @@ function _encodeMilliseconds(date) {
   return Buffer.concat([bcd.encode(msd), bcd.encode(lsd)]);
 }
 
-function decode(bytes) {
+function decode(bytes, useUtc) {
   var date = [
     2000 + bcd.decode(bytes.slice(0, 1)),
     bcd.decode(bytes.slice(1, 2)) - 1,
@@ -31,11 +31,21 @@ function decode(bytes) {
     _decodeMillisecond(bytes.slice(6, 8))
   ];
 
-  return moment(date).toDate();
+  if (useUtc) {
+    return moment.utc(date).toDate();
+  } else {
+    return moment(date).toDate();
+  }
 }
 
-function encode(encodedDate) {
-  var date = moment(encodedDate);
+function encode(encodedDate, useUtc) {
+  var date = null;
+
+  if (useUtc) {
+    date = moment.utc(encodedDate);
+  } else {
+    date = moment(encodedDate);
+  }
 
   var splitDate = [
     bcd.encode(date.year() - 2000),
