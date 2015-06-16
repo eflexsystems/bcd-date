@@ -16,6 +16,14 @@ describe("bcd-date", function() {
       assert.deepEqual(result, expected);
     });
 
+    it("can handle zero milliseconds", function() {
+      var expected = moment('2010-12-23 11:30:30.000').toDate();
+      var bytes    = new Buffer('1012231130300000', 'hex');
+      var result   = subject.decode(bytes);
+
+      assert.deepEqual(result, expected);
+    });
+
     it("should handle midnight properly", function() {
       var expected = moment('2010-01-01 00:00:00.123').toDate();
       var bytes    = new Buffer('1001010000001234', 'hex');

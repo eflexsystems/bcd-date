@@ -6,7 +6,8 @@ var moment = require('moment');
 function _decodeMillisecond(bytes) {
     var number           = bcd.decode(bytes);
     var numberString     = number.toString();
-    var lastDigitRemoved = numberString.slice(0, numberString.length - 1);
+    var length = Math.max(1, numberString.length - 1);
+    var lastDigitRemoved = numberString.slice(0, length);
 
     return parseInt(lastDigitRemoved);
 }
