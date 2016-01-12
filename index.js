@@ -49,12 +49,12 @@ function encode(encodedDate, useUtc) {
   }
 
   var splitDate = [
-    bcd.encode(date.year() - 2000),
-    bcd.encode(date.month() + 1),
-    bcd.encode(date.date()),
-    bcd.encode(date.hour()),
-    bcd.encode(date.minute()),
-    bcd.encode(date.second()),
+    bcd.encode(date.year() - 2000, 1),
+    bcd.encode(date.month() + 1  , 1),
+    bcd.encode(date.date()       , 1),
+    bcd.encode(date.hour()       , 1),
+    bcd.encode(date.minute()     , 1),
+    bcd.encode(date.second()     , 1),
     _encodeMilliseconds(date)
   ];
 
