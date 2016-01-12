@@ -43,8 +43,8 @@ describe("bcd-date", function() {
 
   describe("encode", function() {
     it("should encode a date into a bcd-date buffer", function() {
-      var encodedDate = moment('2010-12-23 11:30:30.123').toDate();
-      var expected    = new Buffer('1012231130301234', 'hex');
+      var encodedDate = moment('2010-12-23 11:00:30.123').toDate();
+      var expected    = new Buffer('1012231100301234', 'hex');
       var result      = subject.encode(encodedDate);
 
       assert.deepEqual(result, expected);
